@@ -1,6 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const path = require('path')
-
+const webpack = require('webpack')
+//用于后面判断是否是开发环境，如果是会配置热更新等配置
 const isDev = process.env.NODE_ENV === 'development'
 const config= {
     entry:{
@@ -34,6 +35,12 @@ const config= {
     })]
 }
 if(isDev){
+    config.entry={
+        app:[
+            'react-hot-loader/patch',
+            path.join(__dirname,'../client/app.js')
+        ]
+    }
     //启动webpack-dev-server时要删除dist目录，否则请求不到js文件
     config.devServer={
         host:'0.0.0.0',
@@ -43,12 +50,13 @@ if(isDev){
             errors:true
         },
         port: 8888,
-        //此处要与ouput中的public相同，否则请求不到js文件
+        //此处要与ouput中的publicPath相同，否则请求不到js文件
         publicPath:'/public',
         //当请求的文档不存在时404，返回/public/index.html
         historyApiFallback:{
             index:'/public/index.html'
         }
     }
+    config.plugins.push(new webpack.HotModuleReplacementPlugin())
 }
 module.exports = config

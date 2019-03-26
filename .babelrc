@@ -2,5 +2,9 @@
     "presets": [
         ["es2015",{"loose":true}],
         "react"
+    ],
+    //提供热插拔
+    "plugins": [
+        "react-hot-loader/babel"
     ]
 }

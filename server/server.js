@@ -1,7 +1,9 @@
 const express  =require('express')
+//服务器中渲染dom的包
 const ReactSSR =  require('react-dom/server') 
 //require的内容在default中，所以要在后面加.default
 const serverEntry = require('../dist/server-entry').default
+//nodejs中的fs包，用来读写文件，文件是写入磁盘
 const fs = require('fs')
 const path = require('path')
 const template = fs.readFileSync(path.join(__dirname,'../dist/index.html'),'utf8')
