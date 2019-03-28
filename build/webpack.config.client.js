@@ -35,6 +35,7 @@ const config= {
     })]
 }
 if(isDev){
+    //为了热插拔
     config.entry={
         app:[
             'react-hot-loader/patch',
@@ -57,6 +58,7 @@ if(isDev){
             index:'/public/index.html'
         }
     }
+    //热插拔，需要import webpack
     config.plugins.push(new webpack.HotModuleReplacementPlugin())
 }
 module.exports = config
